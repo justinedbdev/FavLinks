@@ -26,7 +26,7 @@ class Link
     private ?string $link = null;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'links')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private $user = null;
 
     public function getId(): ?int
