@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource]
@@ -18,15 +19,17 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['link:read', 'link:write'])]
     private ?string $surname = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['link:read', 'link:write'])]
     private ?string $forename = null;
 
     #[ORM\Column(length: 255)]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class,)]
     private Collection $links;
 
     public function __construct()

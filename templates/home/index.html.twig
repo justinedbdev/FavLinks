@@ -4,5 +4,28 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Hello</h1>
+
+	<header>
+		<div class="container">
+			<div class="text-center">
+				<h1>FavLinks</h1>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-10">
+					<input type="text" class="form-control" type="text" placeholder="Recherchez votre lien...">
+				</div>
+				<div class="col-2">
+					<button class="btn btn-primary">Ajouter un lien</button>
+				</div>
+			</div>
+			<div class="row row-cols-3" id="linksContainer"></div>
+		</div>
+	</main>
+
+
 {% endblock %}

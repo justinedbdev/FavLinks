@@ -6,9 +6,15 @@ use App\Repository\LinkRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    paginationItemsPerPage: 10,
+    paginationClientItemsPerPage: true,
+    normalizationContext: ['groups' => ['link:read']],
+    denormalizationContext: ['groups' => ['link:write']]
+)]
 class Link
 {
     #[ORM\Id]
@@ -17,16 +23,20 @@ class Link
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['link:read', 'link:write'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['link:read', 'link:write'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['link:read', 'link:write'])]
     private ?string $link = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'links')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'links', fetch: "EAGER")]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    #[Groups(['link:read', 'link:write'])]
     private $user = null;
 
     public function getId(): ?int
