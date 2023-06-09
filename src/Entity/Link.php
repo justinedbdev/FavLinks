@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\LinkRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,11 +12,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: LinkRepository::class)]
 #[ApiResource(
-    paginationItemsPerPage: 10,
+    paginationItemsPerPage: 12,
     paginationClientItemsPerPage: true,
     normalizationContext: ['groups' => ['link:read']],
     denormalizationContext: ['groups' => ['link:write']]
 )]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'ipartial'])]
 class Link
 {
     #[ORM\Id]

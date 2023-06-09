@@ -14,9 +14,9 @@ class LinkFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
 
-        for ($lk = 1; $lk <= 10; $lk++) {
+        for ($lk = 1; $lk <= 36; $lk++) {
             $link = new Link();
-            $link->setTitle($faker->text(5));
+            $link->setTitle($faker->sentence());
             $link->setDescription($faker->text());
             $link->setLink($faker->url());
 
