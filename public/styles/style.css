@@ -1,3 +1,9 @@
-.cardLink {
+.cardLinks {
   padding: 10px;
+}
+
+.btn-delete-link {
+  float: right;
+  padding: 0px 6px;
+  margin: 4px;
 }

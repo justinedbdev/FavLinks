@@ -16,20 +16,22 @@ class User
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['link:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['link:read', 'link:write'])]
+    #[Groups(['link:read'])]
     private ?string $surname = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['link:read', 'link:write'])]
+    #[Groups(['link:read'])]
     private ?string $forename = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['link:read'])]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class,)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Link::class)]
     private Collection $links;
 
     public function __construct()

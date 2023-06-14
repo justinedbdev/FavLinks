@@ -23,6 +23,7 @@ class Link
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['link:read', 'link:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -37,7 +38,7 @@ class Link
     #[Groups(['link:read', 'link:write'])]
     private ?string $link = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'links', fetch: "EAGER")]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'links', fetch: "EAGER", cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     #[Groups(['link:read', 'link:write'])]
     private $user = null;

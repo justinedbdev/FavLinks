@@ -20,47 +20,47 @@
 					<input id="searchBarInput" onchange="searchLinks()" type="text" class="form-control" type="text" placeholder="Recherchez votre lien...">
 				</div>
 				<div class="col-2">
-					<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addLinkModal">Ajouter un lien</button>
+					<button class="btn btn-primary" onclick="showAddLinkModal()">
+						<i class="bi bi-plus-square"></i>
+					</button>
 				</div>
 			</div>
 			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 p-3" id="linksContainer"></div>
 		</div>
 
 		<!-- Modal -->
-		<div class="modal fade" id="addLinkModal" tabindex="-1" aria-labelledby="addLinkModal" aria-hidden="true">
+		<div class="modal fade" id="addLinkModal" tabindex="-1" aria-labelledby="addLinkModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title fs-5" id="addLinkModal">Ajouter un lien</h1>
+						<h1 class="modal-title fs-5" id="addLinkModalLabel">Ajouter un lien</h1>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
 						<form id="addLinkForm">
 							<div class="mb-3">
 								<label for="titleInput" class="form-label">Titre</label>
-								<input type="text" class="form-control" id="titleInput" aria-describedby="emailHelp">
+								<input name="title" type="text" class="form-control" id="titleInput">
 							</div>
 							<div class="mb-3">
 								<label for="descriptionInput" class="form-label">Description</label>
-								<textarea type="text" class="form-control" id="descriptionInput"></textarea>
+								<textarea name="description" type="text" class="form-control" id="descriptionInput"></textarea>
 							</div>
 							<div class="mb-3">
 								<label for="linksInput" class="form-label">URL</label>
-								<input type="text" class="form-control" id="linksInput">
+								<input name="link" type="text" class="form-control" id="linksInput">
 							</div>
 							<div class="mb-3">
-								<label for="surnameUserInput" class="form-label">Nom de l'utilisateur</label>
-								<input type="text" class="form-control" id="surnameUserInput">
+								<label for="idUserInput" class="form-label">Identifiant user</label>
+								<input name="userId" type="number" class="form-control" id="idUserInput">
 							</div>
-							<div class="mb-3">
-								<label for="forenameUserInput" class="form-label">Prénom de l'utilisateur</label>
-								<input type="text" class="form-control" id="forenameUserInput">
-							</div>
+							<input name="idLink" type="hidden" id="idLinkInput">
 						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-						<button type="button" class="btn btn-primary" onclick="addLink()">Ajouter</button>
+						<button type="button" class="btn btn-primary" id="btnValidationAddModal" onclick="addLink()">Ajouter</button>
+						<button type="button" class="btn btn-primary" id="btnValidationEditModal" onclick="editLinkAction()">Modifier</button>
 					</div>
 				</div>
 			</div>
