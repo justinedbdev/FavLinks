@@ -5,9 +5,6 @@ let isSearchMode = false;
 const myModal = document.getElementById("addLinkModal");
 const addEditModal = new bootstrap.Modal(myModal);
 
-//let addEditModal = new bootstrap.Modal(document.getElementById("addLinkModal"),{});
-
-//Juste pour tester l'appel AJAX
 function getLinks(perPage = 12, page = 1) {
   isSearchMode = false;
 
@@ -92,13 +89,9 @@ function searchLinks() {
         if (response.length === 0) {
           throw new Error("Aucun élément ne correspond à cette recherche");
         }
-        // Déclare une chaine de caractère
         let myHtml = "";
 
-        //Pour chaque lien que je reçoit de ma requête ajax
         response.forEach((element) => {
-          // Je créé un élément en html, qui corresponds à l'affichage de mon lien
-
           myHtml += getCard(
             element.title,
             element.description,
@@ -182,9 +175,8 @@ function editLinkAction() {
       }
     })
     .then((element) => {
-      //Supprime dans la page la card du lien avant d'être modifié
       document.getElementById("cardLink" + element.id).remove();
-      //Je génère la nouvelle card, et l'ajoute dans le html
+
       var myCard = getCard(
         element.title,
         element.description,
@@ -194,9 +186,9 @@ function editLinkAction() {
       );
       var html = myCard + document.getElementById("linksContainer").innerHTML;
       document.getElementById("linksContainer").innerHTML = html;
-      //je reset mon formulaire
+
       myForm.reset();
-      //Je ferme la modale
+
       addEditModal.hide();
     })
     .catch((error) => {
@@ -270,7 +262,6 @@ function addLink() {
 
 function deleteLink(id) {
   if (confirm("Êtes-vous sûr.e de voulour supprimer ce lien?")) {
-    // Si il est ok, on fait l'appel AJAX
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
 
@@ -324,11 +315,8 @@ document.addEventListener(
     getLinks(15, 1);
 
     window.addEventListener("scroll", () => {
-      const {
-        scrollTop, // Ce qui est au dessus de mon écran (j'ai déjà scrollé cette partie)
-        scrollHeight, // La hauteur totale de mon site
-        clientHeight, // La hauteur de mon écran
-      } = document.documentElement;
+      const { scrollTop, scrollHeight, clientHeight } =
+        document.documentElement;
 
       if (!isSearchMode) {
         if (scrollTop + clientHeight >= scrollHeight - 5) {
