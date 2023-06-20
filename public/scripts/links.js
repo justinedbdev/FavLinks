@@ -186,7 +186,6 @@ function editLinkAction() {
       document.getElementById("cardLink" + element.id).remove();
       //Je génère la nouvelle card, et l'ajoute dans le html
       var myCard = getCard(
-        element.id,
         element.title,
         element.description,
         element.link,
