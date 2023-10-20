@@ -23,13 +23,9 @@ function getLinks(perPage = 12, page = 1) {
     })
     .then((json) => json["hydra:member"])
     .then((response) => {
-      // Déclare une chaine de caractère
       let myHtml = "";
 
-      //Pour chaque lien que je reçoit de ma requête ajax
       response.forEach((element) => {
-        // Je créé un élément en html, qui corresponds à l'affichage de mon lien
-
         myHtml += getCard(
           element.title,
           element.description,
@@ -40,10 +36,8 @@ function getLinks(perPage = 12, page = 1) {
         );
       });
       if (page == 1) {
-        // Premier affichage, on vide le contenu de la div
         document.getElementById("linksContainer").innerHTML = myHtml;
       } else {
-        // Etape de pagination ajoute le conenu en dessous
         document.getElementById("linksContainer").innerHTML += myHtml;
       }
     })
@@ -312,7 +306,7 @@ function getCard(title, description, link, forename, surname, id) {
 document.addEventListener(
   "DOMContentLoaded",
   function () {
-    getLinks(15, 1);
+    getLinks(12, 1);
 
     window.addEventListener("scroll", () => {
       const { scrollTop, scrollHeight, clientHeight } =
